@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends 'PricePal_app/product_form.html' %}
+
+</head>
+<body style="background-color: brown">
+    {%block content%}
+    <div class="container-fluid">
+        <div class="row"  style="padding-top: 10%">
+
+            <div class="col-lg-3" style="padding-left:6%" >
+                <h1><u>Walmart</u></h1>
+                <ul>
+                    <li><h3>Availability:</h3></li>
+                    <li><h3>Price:{{ walmart_price }}</h3></li>
+                </ul>
+            </div>
+            <div class="col-lg-3" style="padding-left:6%">
+                <h1><u>NewEgg</u></h1>
+                <ul>
+                    <li><h3>Availability:</h3></li>
+                    <li><h3>Price:{{ newegg_price }}</h3></li>
+                </ul>
+            </div>
+            <div class="col-lg-3" style="padding-left:6%">
+                <h1><u>Ebay</u></h1>
+                <ul>
+                    <li><h3>Availability:</h3></li>
+                    <li><h3>Price:{{ ebay_price }}</h3></li>
+                </ul>
+            </div>
+            <div class="col-lg-3" style="padding-left:6%">
+                <h1><u>BestBuy</u></h1>
+                <ul>
+                    <li><h3>Availability:</h3></li>
+                    <li><h3>Price:{{ bestbuy_price }}</h3></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {%endblock%}
+</body>
+</html>
