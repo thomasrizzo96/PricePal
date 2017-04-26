@@ -21,7 +21,7 @@ headers = {'User-Agent': 'User-Agent  Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv
 
 def search_product(user_description):##STARTING POINT
     product_search_url = find_search_url(user_description)
-    print product_search_url
+    #print product_search_url
     request = requests.get(product_search_url, headers=headers)
     soup = BeautifulSoup(request.content, 'html.parser')
     #print str(soup)
@@ -41,7 +41,14 @@ def search_product(user_description):##STARTING POINT
     name_div =  soup.find("a", { "class" : "a-link-normal s-access-detail-page  s-color-twister-title-link a-text-normal" })
     product_name = name_div.contents[0].contents[0]
 
-    return_list = [product_name, price]
+#with Beautiful Soup
+    img_div = soup.find("a", { "class" : "a-link-normal a-text-normal" })
+    img_src_container = img_div.find_all('img', src=True)
+    img_address =  img_src_container[0]['src']
+
+    return_list = [product_name, price, img_address]
+    #print return_list
+    return return_list
 
 
 ##HELPERS
