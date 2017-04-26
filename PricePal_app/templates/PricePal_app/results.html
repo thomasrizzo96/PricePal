@@ -9,6 +9,14 @@
     <div class="container-fluid">
     <h1>{{ Product.name }}</h1>
         <div class="row"  style="padding-top: 10%">
+            <div class="col-lg-3" style="padding-left:6%" >
+                <h1><u>Amazon</u></h1>
+                <ul>
+                    <li href="{{ amazon_url }}">Name: {{ amazon_name }}</li>
+                    <li>Price:{{ amazon_price }}</li>
+                    <img src="{{ amazon_image }}" alt="{{ amazon_name }}"/>
+                </ul>
+            </div>
 
             <div class="col-lg-3" style="padding-left:6%" >
                 <h1><u>Walmart</u></h1>
@@ -20,7 +28,7 @@
             <div class="col-lg-3" style="padding-left:6%">
                 <h1><u>NewEgg</u></h1>
                 <ul>
-                    <li><h3>Availability:</h3></li>
+                    <li href="{{ newegg_url }}">Name: {{ newegg_name }}</li>
                     <li><h3>Price:{{ newegg_price }}</h3></li>
                 </ul>
             </div>
