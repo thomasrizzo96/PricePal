@@ -7,6 +7,7 @@
 <body style="background-color: brown">
     {%block content%}
     <div class="container-fluid">
+    <h1>{{ Product.name }}</h1>
         <div class="row"  style="padding-top: 10%">
 
             <div class="col-lg-3" style="padding-left:6%" >
@@ -26,8 +27,9 @@
             <div class="col-lg-3" style="padding-left:6%">
                 <h1><u>Ebay</u></h1>
                 <ul>
-                    <li><h3>Availability:</h3></li>
-                    <li><h3>Price:{{ ebay_price }}</h3></li>
+                    <li>Name: {{ ebay_name }}</li>
+                    <img src="{{ ebay_image }}">
+                    <li>Price: {{ ebay_price }}</li>
                 </ul>
             </div>
             <div class="col-lg-3" style="padding-left:6%">
