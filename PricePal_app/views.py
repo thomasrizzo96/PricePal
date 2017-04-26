@@ -24,8 +24,11 @@ def loading(request):
 def results(request, product_id):
     product = Product.objects.get(id=product_id)
     bestbuy_price = search_bestbuy(product.get_name())
-    ebay_price = search_ebay(product.get_name())
+    ebay_data = search_ebay(product.get_name())
+    ebay_price = ebay_data[2]
+    ebay_name = ebay_data[0]
+    ebay_image = ebay_data[1]
     walmart_price = search_walmart(product.get_name())
     newegg_price = search_product(product.get_name())
     product.delete()
-    return render(request, 'PricePal_app/results.html', {'bestbuy_price': bestbuy_price, 'ebay_price': ebay_price, 'walmart_price': walmart_price, 'newegg_price': newegg_price})
+    return render(request, 'PricePal_app/results.html', {'bestbuy_price': bestbuy_price, 'ebay_price': ebay_price, 'ebay_image': ebay_image, 'ebay_name': ebay_name, 'walmart_price': walmart_price, 'newegg_price': newegg_price})
