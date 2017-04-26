@@ -38,16 +38,22 @@ def search_product(user_description):##STARTING POINT
 
 
 #with Beautiful Soup
-    name_div =  soup.find("a", { "class" : "a-link-normal s-access-detail-page  s-color-twister-title-link a-text-normal" })
+    name_div = soup.find("a", { "class" : "a-link-normal s-access-detail-page  s-color-twister-title-link a-text-normal" })
     product_name = name_div.contents[0].contents[0]
+
+#with Beautiful Soup
+    product_link_div = soup.find("div", { "class" : "a-row a-spacing-none" })
+    product_link_container = product_link_div.find_all('a', href=True)
+    product_link = product_link_container[0]['href']
+    print product_link
+
 
 #with Beautiful Soup
     img_div = soup.find("a", { "class" : "a-link-normal a-text-normal" })
     img_src_container = img_div.find_all('img', src=True)
     img_address =  img_src_container[0]['src']
 
-    return_list = [product_name, price, img_address]
-    #print return_list
+    return_list = [product_name, price, product_link, img_address]
     return return_list
 
 
