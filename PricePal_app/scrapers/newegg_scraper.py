@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import user_agent_headers
 
 newegg_search_url_beginning = "https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description="
 newegg_search_url_end = "&bop=And&Order=BESTSELLING&PageSize=12"
@@ -7,9 +8,8 @@ newegg_search_url_end = "&bop=And&Order=BESTSELLING&PageSize=12"
 
 
 ##Specify user agent
-headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
-
-
+header_string = user_agent_headers.get_random_header()
+headers = {'User-Agent': 'User-Agent ' + header_string}
 
 def search_product(user_description):##STARTING POINT
     product_search_url = find_search_url(user_description)
@@ -18,14 +18,23 @@ def search_product(user_description):##STARTING POINT
     soup = BeautifulSoup(request.content, 'html.parser')
     price_div =  soup.find("div", { "class" : "item-container" })
 
-    dollar_price = price_div.contents[5].contents[17].contents[3].contents[5].contents[3].contents[0]
-    cents_price = price_div.contents[5].contents[17].contents[3].contents[5].contents[4].contents[0]
+    try:
+        dollar_price = price_div.contents[5].contents[17].contents[3].contents[5].contents[3].contents[0]
+    except IndexError:
+        dollar_price = 0
+    try:
+        cents_price = price_div.contents[5].contents[17].contents[3].contents[5].contents[4].contents[0]
+    except IndexError:
+        cents_price = 0
+
     price = '$' + str(dollar_price) + str(cents_price)
 
     title_object = soup.find("a", {"class" : 'item-title'})
-    title = title_object.contents[1]
-
-    return [price, title]
+    if title_object:#exception checking
+        title = title_object.contents[0]
+        return [price, title]
+    else:
+        return [price, "No title found"]
 
 
 ##HELPERS
@@ -35,4 +44,3 @@ def find_search_url(user_description):
         search_url += word + "+"
     search_url += newegg_search_url_end
     return search_url
-

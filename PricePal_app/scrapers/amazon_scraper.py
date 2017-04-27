@@ -1,14 +1,15 @@
 import requests
 import re
 from bs4 import BeautifulSoup
-
+import user_agent_headers
 
 amazon_search_url_beginning = "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords="
 ##middle of url looks like this: "each+term+searched+with+a+plus+in+between"
 
 
 ##Specify user agent
-headers = {'User-Agent': 'User-Agent  Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0'}
+header_string = user_agent_headers.get_random_header()
+headers = {'User-Agent': 'User-Agent ' + header_string}
 
 # price_regex = r"""(?:<span class="sx-price sx-price-large">
 #                     <sup class="sx-price-currency">$</sup>
@@ -49,7 +50,10 @@ def search_amazon(user_description):##STARTING POINT
 #with Beautiful Soup
     img_div = soup.find("a", { "class" : "a-link-normal a-text-normal" })
     img_src_container = img_div.find_all('img', src=True)
-    img_address =  img_src_container[0]['src']
+    try:
+        img_address =  img_src_container[0]['src']
+    except IndexError:
+        img_address = "None"
 
     return_list = [price, product_name, product_link, img_address]
     #print return_list
@@ -62,4 +66,3 @@ def find_search_url(user_description):
     for word in user_description.split(" "):
         search_url += word + "+"
     return search_url
-

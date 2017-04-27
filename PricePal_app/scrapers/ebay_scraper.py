@@ -1,7 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
+import user_agent_headers
 
-headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+#specify User-Agent
+header_string = user_agent_headers.get_random_header()
+headers = {'User-Agent': 'User-Agent ' + header_string}
 
 def search_ebay(search_term):
     #search_term.replace(" ", "+")
@@ -14,7 +17,11 @@ def search_ebay(search_term):
     soup = BeautifulSoup(doc.content, "html.parser")
     price_object = soup.find("li", {"class": "lvprice prc"})
     image_object = soup.find("div", {"class": "lvpic pic img left"})
-    image = str(image_object.contents[1].contents[1].contents[1])
+    try:
+        image = str(image_object.contents[1].contents[1].contents[1])
+    except IndexError:
+        image = "none"
+
     image = image.replace("<img", "")
     image = image.replace("/>", "")
     newImage = ""
