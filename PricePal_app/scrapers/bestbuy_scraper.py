@@ -1,7 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
+import user_agent_headers
 
-headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+#specify User-Agent
+header_string = user_agent_headers.get_random_header()
+headers = {'User-Agent': 'User-Agent ' + header_string}
 
 def search_bestbuy(search_term):
     search_url = "https://www.google.com/search?tbs=vw:l,mr:1,seller:1311674,init_ar:SgVKAwiLAkoKUggI4o4rIO-OK0oKUggIyt45IMveOUoKUggI4Os5IOj8PQ%3D%3D&tbm=shop&q="
