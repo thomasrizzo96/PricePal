@@ -51,7 +51,7 @@ def search_amazon(user_description):##STARTING POINT
     img_src_container = img_div.find_all('img', src=True)
     img_address =  img_src_container[0]['src']
 
-    return_list = [product_name, price, product_link, img_address]
+    return_list = [price, product_name, product_link, img_address]
     #print return_list
     return return_list
 
@@ -63,4 +63,3 @@ def find_search_url(user_description):
         search_url += word + "+"
     return search_url
 
-search_amazon("iphone 7")

@@ -17,20 +17,15 @@ def search_product(user_description):##STARTING POINT
     request = requests.get(product_search_url, headers=headers)
     soup = BeautifulSoup(request.content, 'html.parser')
     price_div =  soup.find("div", { "class" : "item-container" })
-    name_obj = soup.find("a", {"class": "item-title"})
+
     dollar_price = price_div.contents[5].contents[17].contents[3].contents[5].contents[3].contents[0]
     cents_price = price_div.contents[5].contents[17].contents[3].contents[5].contents[4].contents[0]
     price = '$' + str(dollar_price) + str(cents_price)
-    name = name_obj.contents[1]
-    url = str(name_obj)
-    newURL = ''
-    for i in range(0, len(url)):
-        if url[i] == 'h' and url[i+1] == 't':
-            while i < len(url)-1 and url[i] != '"':
-                newURL += url[i]
-                i += 1
-            break
-    return [price, name, url]
+
+    title_object = soup.find("a", {"class" : 'item-title'})
+    title = title_object.contents[1]
+
+    return [price, title]
 
 
 ##HELPERS
@@ -41,4 +36,3 @@ def find_search_url(user_description):
     search_url += newegg_search_url_end
     return search_url
 
-search_product("iphone 7")

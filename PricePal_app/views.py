@@ -24,20 +24,32 @@ def loading(request):
 
 def results(request, product_id):
     product = Product.objects.get(id=product_id)
-    bestbuy_price = search_bestbuy(product.get_name())
+    product_name = product.get_name()
+
+    bestbuy_data = search_bestbuy(product.get_name())
+    bestbuy_price = bestbuy_data[0]
+    bestbuy_title = bestbuy_data[1]
+
     ebay_data = search_ebay(product.get_name())
-    ebay_price = ebay_data[2]
-    ebay_name = ebay_data[0]
-    ebay_image = ebay_data[1]
-    walmart_price = search_walmart(product.get_name())
+    ebay_price = ebay_data[0]
+    ebay_title = ebay_data[1]
+    ebay_image = ebay_data[2]
+
+    walmart_data = search_walmart(product.get_name())
+    walmart_price = walmart_data[0]
+    walmart_title = walmart_data[1]
+
     newegg_data = search_product(product.get_name())
     newegg_price = newegg_data[0]
-    newegg_name = newegg_data[1]
-    newegg_url = newegg_data[2]
-    amazon_dat = search_amazon(product.get_name())
-    amazon_name = amazon_dat[0]
-    amazon_price = amazon_dat[1]
-    amazon_url = amazon_dat[2]
-    amazon_image = amazon_dat[3]
+    newegg_title = newegg_data[1]
+
+    amazon_data = search_amazon(product.get_name())
+    amazon_price = amazon_data[0]
+    amazon_title = amazon_data[1]
+    amazon_link = amazon_data[2]
+    amazon_image = amazon_data[3]
+
     product.delete()
-    return render(request, 'PricePal_app/results.html', {'amazon_name': amazon_name, 'amazon_price': amazon_price, 'amazon_url': amazon_url, 'amazon_image': amazon_image, 'bestbuy_price': bestbuy_price, 'ebay_price': ebay_price, 'ebay_image': ebay_image, 'ebay_name': ebay_name, 'walmart_price': walmart_price, 'newegg_price': newegg_price, 'newegg_name': newegg_name, 'newegg_url': newegg_url})
+
+
+    return render(request, 'PricePal_app/results.html', {'amazon_price':amazon_price,'amazon_link':amazon_link,'amazon_image':amazon_image,'amazon_title':amazon_title,'bestbuy_price': bestbuy_price,'bestbuy_title':bestbuy_title, 'ebay_price': ebay_price,'ebay_title':ebay_title,'ebay_image':ebay_image, 'walmart_price': walmart_price,'walmart_title':walmart_title, 'newegg_price': newegg_price,'newegg_title':newegg_title, 'product_name':product_name})

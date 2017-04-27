@@ -31,6 +31,5 @@ def search_ebay(search_term):
     price = price_string.replace("\n", "")
     price = price.replace("\t", "")
 
-    product = [name, image, price]
+    product = [price, name, image]
     return product
-

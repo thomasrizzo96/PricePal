@@ -4,51 +4,64 @@
     {% extends 'PricePal_app/product_form.html' %}
 
 </head>
-<body style="background-color: brown">
-    {%block content%}
+<body style="background-color: greenyellow">
+{% block content %}
     <div class="container-fluid">
-    <h1>{{ Product.name }}</h1>
-        <div class="row"  style="padding-top: 10%">
-            <div class="col-lg-3" style="padding-left:6%" >
-                <h1><u>Amazon</u></h1>
-                <ul>
-                    <li href="{{ amazon_url }}">Name: {{ amazon_name }}</li>
-                    <li>Price:{{ amazon_price }}</li>
-                    <img src="{{ amazon_image }}" alt="{{ amazon_name }}"/>
-                </ul>
-            </div>
-
-            <div class="col-lg-3" style="padding-left:6%" >
+        <div class="row" align="center" style="padding-top: 5%">
+            <h1 style="text-decoration: underline">You Searched: {{ product_name }}</h1>
+        </div>
+        <div class="row" style="padding-top: 5%">
+            <div class="col-lg-4" style="padding-left:6%; background-color: whitesmoke; border-radius: 15px; border: solid;display: table-cell; float: none;">
                 <h1><u>Walmart</u></h1>
                 <ul>
-                    <li><h3>Availability:</h3></li>
-                    <li><h3>Price:{{ walmart_price }}</h3></li>
+                    <li><h3>Title:</h3><h4>{{ walmart_title }}</h4></li>
+                    <li><h3>Price:</h3><h4>{{ walmart_price }}</h4></li>
                 </ul>
             </div>
-            <div class="col-lg-3" style="padding-left:6%">
+            <div class="col-lg-4"
+                 style="padding-left:6%; background-color: whitesmoke; border-radius: 15px;border: solid;display: table-cell; float: none;">
                 <h1><u>NewEgg</u></h1>
                 <ul>
-                    <li href="{{ newegg_url }}">Name: {{ newegg_name }}</li>
-                    <li><h3>Price:{{ newegg_price }}</h3></li>
+                    <li><h3>Title:</h3><h4>{{ newegg_title }}</h4></li>
+                    <li><h3>Price:</h3><h4>{{ newegg_price }}</h4></li>
                 </ul>
             </div>
-            <div class="col-lg-3" style="padding-left:6%">
+            <div class="col-lg-4"
+                 style="padding-left:6%; background-color: whitesmoke; border-radius: 15px;border: solid;display: table-cell; float: none;">
+
                 <h1><u>Ebay</u></h1>
                 <ul>
-                    <li>Name: {{ ebay_name }}</li>
-                    <img src="{{ ebay_image }}">
-                    <li>Price: {{ ebay_price }}</li>
+                    <li><h3>Title:</h3><h4>{{ ebay_title }}</h4></li>
+                    <li><h3>Price:</h3><h4>{{ ebay_price }}</h4></li>
+                    <img alt="{{ ebay_title }}" src="{{ ebay_image }}"/>
                 </ul>
+
             </div>
-            <div class="col-lg-3" style="padding-left:6%">
+        </div>
+        <div class=" row">
+            <div class="col-lg-6"
+                 style="padding-left:6%; background-color: whitesmoke; border-radius: 15px;border: solid;display: table-cell; float: none;">
+
+                <h1><u>Amazon</u></h1>
+                <ul>
+                    <li><h3>Title:</h3><h4>{{ amazon_title }}</h4></li>
+                    <li><h3>Price:</h3><h4>{{ amazon_price }}</h4></li>
+                    <img alt="{{ amazon_title }}" src="{{ amazon_image }}"/>
+                </ul>
+
+            </div>
+            <div class="col-lg-6"
+                 style="padding-left:6%; background-color: whitesmoke; border-radius: 20px;border: solid;display: table-cell; float: none;">
                 <h1><u>BestBuy</u></h1>
                 <ul>
-                    <li><h3>Availability:</h3></li>
-                    <li><h3>Price:{{ bestbuy_price }}</h3></li>
+                    <li><h3>Title:</h3><h4>{{ bestbuy_title }}</h4></li>
+                    <li><h3>Price:</h3><h4>{{ bestbuy_price }}</h4></li>
                 </ul>
             </div>
         </div>
+
+
     </div>
-    {%endblock%}
+{% endblock %}
 </body>
 </html>
